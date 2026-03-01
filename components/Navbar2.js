@@ -63,6 +63,7 @@ export default function Navbar2({
         </button>
 
         <Button
+          href="/ContactUs"
           bgcolor={`bg-[var(--button-color)] `}
           className="hidden lg:block font-medium  xl:text-sm 2xl:text-xl"
         />
@@ -70,9 +71,8 @@ export default function Navbar2({
 
       {/* mobile menu */}
       <nav
-        className={`lg:hidden bg-white transition-all duration-300 ease-in-out overflow-hidden ${
-          open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`lg:hidden bg-white transition-all duration-300 ease-in-out overflow-hidden ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
         {/* <ul className="flex flex-col space-y-8 p-5">
           {items.map((item) => (
@@ -87,7 +87,7 @@ export default function Navbar2({
           ))}
         </ul> */}
         <div className="p-4">
-          <Button bgcolor={`bg-[var(--button-color)]`} className="w-full" />
+          {/* <Button bgcolor={`bg-[var(--button-color)]`} className="w-full" /> */}
         </div>
       </nav>
     </header>
