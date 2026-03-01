@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import "aos/dist/aos.css";
+
+:root {
+  --font-geist-sans: "Geist Sans", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+  --button-color: #fed904;
+  --bg-red: #d9232d;
+  --bg-light-red: #f1edec;
+}
+
+.main-heading {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+.sub-heading {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+}
+.paragraph {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+}
+
+/* ensure elements don't exceed viewport height */
+#__next,
+body,
+html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.group:hover .animate-marquee {
+  animation-play-state: paused;
+}
