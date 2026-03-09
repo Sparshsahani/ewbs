@@ -15,6 +15,7 @@ import OverviewComp from '@/components/OverviewComp'
 import { IoIosSend } from 'react-icons/io'
 import { PiFileTextLight } from 'react-icons/pi'
 import { FiCheckCircle } from 'react-icons/fi'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function AmcFreezone() {
     return (
@@ -26,7 +27,7 @@ export default function AmcFreezone() {
                 title={`Esttablish Your Company `}
                 title2={`In Ajman Media City`}
             />
-
+            <TrustBadge/>
             <OverviewComp
                 title={`Establish your company in Ajman Media City`}
                 paragraphs={[

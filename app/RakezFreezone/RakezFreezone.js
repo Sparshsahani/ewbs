@@ -15,6 +15,7 @@ import { IoIosSend } from 'react-icons/io'
 import { PiFileTextLight } from 'react-icons/pi'
 import { FiCheckCircle } from 'react-icons/fi'
 import PricingPlans from '@/components/PricingPlans'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function RakezFreezone() {
     return (
@@ -25,6 +26,7 @@ export default function RakezFreezone() {
                 title={`Begin Your Entrepreneurial`}
                 title2={`Journey Today!`}
             />
+            <TrustBadge/>
             <OverviewComp
                 overline="OVERVIEW"
                 title={`Establish Your Company in RAKEZ Freezone.`}

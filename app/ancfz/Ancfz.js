@@ -17,6 +17,7 @@ import { FiCheckCircle } from 'react-icons/fi'
 import PricingPlans from '@/components/PricingPlans'
 import Button from '@/components/Button'
 import Image from 'next/image'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function Ancfz() {
     return (
@@ -99,6 +100,7 @@ export default function Ancfz() {
 
                 </div>
             </section>
+            <TrustBadge />
             <OverviewComp
                 overline="OVERVIEW"
                 title={`Establish your company in Ajman Nuventure Freezone`}

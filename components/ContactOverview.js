@@ -27,28 +27,14 @@ export default function ContactOverview({
             >
                 {/* LEFT SIDE */}
                 {showForm && !showImageInsteadOfForm && (
-                    <div className={`rounded-3xl p-8 md:p-12 ${bgColor}`}>
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                onSubmit && onSubmit(e);
-                            }}
-                            className="space-y-4"
-                        >
-                            <input className="w-full p-4 rounded-lg outline-none" placeholder="Full Name" />
-                            <input className="w-full p-4 rounded-lg outline-none" placeholder="Email*" />
-                            <input className="w-full p-4 rounded-lg outline-none" placeholder="Phone*" />
-                            <input className="w-full p-4 rounded-lg outline-none" placeholder="Which Business Are You Planning to Start" />
-
-                            <label className="flex gap-2 text-xs">
-                                <input type="checkbox" defaultChecked />
-                                I agree to EWBS Business Services to collect my details to contact me.
-                            </label>
-
-                            <button className="w-full bg-white text-red-600 font-semibold py-3 rounded-lg hover:bg-red-50 transition">
-                                {submitText}
-                            </button>
-                        </form>
+                    <div className={`rounded-3xl p-2 md:px-12 ${bgColor}`}>
+                        <iframe
+                            id="xxgjl9cdy3MIg0ldO6XF"
+                            src="https://msgsndr.com/widget/form/xxgjl9cdy3MIg0ldO6XF"
+                            style={{ border: "none", width: "100%", minHeight: "400px", padding: 0 }}
+                            scrolling="no"
+                        />
+                        <script src="https://msgsndr.com/js/form_embed.js" />
                     </div>
                 )}
 

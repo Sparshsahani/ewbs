@@ -5,6 +5,7 @@ import LogoCarousel from '@/components/LogoCarousel'
 import MapSection from '@/components/MapSection'
 import OurServices from '@/components/OurServices'
 import ServiceBanner from '@/components/ServiceBanner'
+import TrustBadge from '@/components/TrustBadge'
 import WhatToChat from '@/pages/banner/WhatToChat'
 import Question from '@/pages/section5/Question'
 import Reviews from '@/pages/section7/Reviews'
@@ -28,6 +29,7 @@ export default function Service() {
                 subtitle="Start Strong in Dubai! Transform Your Ideas into Profitable Ventures"
                 hashtag="#ewbsbusiness"
             />
+            <TrustBadge/>
             <AboutSection
                 variant="features"
 

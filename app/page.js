@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import MapSection from "@/components/MapSection";
 import Navbar from "@/components/Navbar";
+import TrustBadge from "@/components/TrustBadge";
 import WhatToChat from "@/pages/banner/WhatToChat";
 import Hero from "@/pages/heroSection/Hero";
 import Banner from "@/pages/section2/Banner";
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
+      <TrustBadge/>
       <Banner />
       <Client />
       <Provide />

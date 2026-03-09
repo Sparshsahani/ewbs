@@ -15,6 +15,7 @@ import Reviews from '@/pages/section7/Reviews'
 import WhatToChat from '@/pages/banner/WhatToChat'
 import ContactOverview from '@/components/ContactOverview'
 import MapSection from '@/components/MapSection'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function ShamsFreezone() {
     return (
@@ -25,6 +26,7 @@ export default function ShamsFreezone() {
                 title={`Setup Your Business `}
                 title2={`In Shams Freezone`}
             />
+            <TrustBadge/>
             <OverviewComp
                 title={`Establish Your Company in SHARJAH MEDIA CITY`}
                 paragraphs={[

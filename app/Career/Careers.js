@@ -1,3 +1,4 @@
+import CareerForm from '@/components/CareerForm'
 import Footer from '@/components/Footer'
 import MapSection from '@/components/MapSection'
 import ServiceBanner from '@/components/ServiceBanner'
@@ -12,6 +13,7 @@ export default function Careers() {
                 title="Career"
                 title2="with Us"
             />
+            <CareerForm />
             <MapSection />
             <WhatToChat />
             <Footer />

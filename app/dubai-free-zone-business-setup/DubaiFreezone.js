@@ -15,6 +15,7 @@ import { IoIosSend } from 'react-icons/io'
 import { PiFileTextLight } from 'react-icons/pi'
 import { FiCheckCircle } from 'react-icons/fi'
 import PricingPlans from '@/components/PricingPlans'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function DubaiFreezone() {
     return (
@@ -25,6 +26,7 @@ export default function DubaiFreezone() {
                 title={`Setup Your Business `}
                 title2={`In Dubai Freezone`}
             />
+            <TrustBadge/>
             <OverviewComp
                 title={`Establish Your Company in Dubai Freezone`}
                 paragraphs={[

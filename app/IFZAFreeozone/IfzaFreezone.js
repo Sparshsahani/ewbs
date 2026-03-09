@@ -15,6 +15,7 @@ import { IoIosSend } from 'react-icons/io'
 import { PiFileTextLight } from 'react-icons/pi'
 import { FiCheckCircle } from 'react-icons/fi'
 import PricingPlans from '@/components/PricingPlans'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function IfzaFreezone() {
     return (
@@ -25,6 +26,8 @@ export default function IfzaFreezone() {
                 title={`Establish Your Company`}
                 title2={`In IFZA Freezone`}
             />
+
+            <TrustBadge/>
             <OverviewComp
                 overline="OVERVIEW"
                 title={`Establish Your Company in IFZA Freezone.`}

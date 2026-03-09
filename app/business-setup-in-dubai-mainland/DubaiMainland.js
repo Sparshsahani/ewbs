@@ -16,6 +16,7 @@ import Footer from '@/components/Footer'
 import WhatToChat from '@/pages/banner/WhatToChat'
 import MapSection from '@/components/MapSection'
 import ContactOverview from '@/components/ContactOverview'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function DubaiMainland() {
     return (
@@ -26,6 +27,7 @@ export default function DubaiMainland() {
                 title={`Company Setup `}
                 title2={`In Dubai Mainland`}
             />
+            <TrustBadge/>
             <OverviewComp
                 title={`MAINLAND - DUBAI - Why Dubai?`}
                 paragraphs={[

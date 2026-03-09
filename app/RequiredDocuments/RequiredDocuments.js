@@ -15,6 +15,7 @@ import Footer from '@/components/Footer'
 import WhatToChat from '@/pages/banner/WhatToChat'
 import MapSection from '@/components/MapSection'
 import ContactOverview from '@/components/ContactOverview'
+import TrustBadge from '@/components/TrustBadge'
 
 export default function RequiredDocuments() {
     return (
@@ -26,6 +27,7 @@ export default function RequiredDocuments() {
                     title={`Dubai Mainland`}
                     title2={`Required Documents`}
                 />
+                <TrustBadge/>
                 <OverviewComp
                     title={`Documents Required for Mainland Companies`}
                     paragraphs={[
