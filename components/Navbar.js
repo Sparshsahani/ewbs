@@ -93,7 +93,7 @@ export default function Navbar({
         <LogoComp />
 
         {/* desktop links */}
-        <nav className="hidden lg:flex space-x-10 2xl:space-x-16 font-medium lg:text-sm xl:text-sm 2xl:text-xl">
+        <nav className="hidden lg:flex space-x-10 2xl:space-x-16 font-normal lg:text-sm xl:text-sm 2xl:text-xl">
           {items.map(renderLink)}
         </nav>
 

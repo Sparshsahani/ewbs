@@ -27,7 +27,8 @@ export default function TrustBadge() {
           minHeight: "180px",
           marginLeft: "auto",
           marginRight: "auto",
-          paddingBottom: "12px",
+          paddingTop: "50px",
+          paddingBottom: "50px",
         }}
       >
         <div
