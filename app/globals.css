@@ -4,9 +4,15 @@
 :root {
   --font-geist-sans: "Geist Sans", sans-serif;
   --font-geist-mono: "Geist Mono", monospace;
+  --font-poppins: "Poppins", sans-serif;
   --button-color: #fed904;
   --bg-red: #d9232d;
   --bg-light-red: #f1edec;
+}
+
+/* apply poppins globally */
+body {
+  font-family: var(--font-poppins), system-ui, sans-serif;
 }
 
 .main-heading {
