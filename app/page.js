@@ -1,6 +1,13 @@
+import { getSeoData, buildMetadata } from "@/lib/getSeoData";
 import Footer from "@/components/Footer";
 import MapSection from "@/components/MapSection";
 import Navbar from "@/components/Navbar";
+
+// Page ID 1 = Home
+export async function generateMetadata() {
+  const seo = await getSeoData(1);
+  return buildMetadata(seo);
+}
 import TrustBadge from "@/components/TrustBadge";
 import WhatToChat from "@/pages/banner/WhatToChat";
 import Hero from "@/pages/heroSection/Hero";
