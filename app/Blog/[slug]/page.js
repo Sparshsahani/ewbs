@@ -1,9 +1,10 @@
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import React from 'react'
 import BlogDetail from './BlogDetail'
 
-const API_BASE = process.env.REACT_APP_API_URL || "https://newcrm.ewbsbusiness.ae/api/v1";
-const IMG_BASE = process.env.REACT_APP_IMG_URL || "https://newcrm.ewbsbusiness.ae";
+const API_BASE = "https://newcrm.ewbsbusiness.ae/api/v1";
+const IMG_BASE = "https://newcrm.ewbsbusiness.ae";
 
 async function getBlogBySlug(slug) {
   try {
@@ -12,14 +13,20 @@ async function getBlogBySlug(slug) {
     });
     if (!res.ok) return null;
     const json = await res.json();
-    return json.status ? json.data : null;
+    if (!json.status) return null;
+    const blog = json.data;
+    if (blog.description) {
+      blog.description = Buffer.from(blog.description, 'base64').toString('utf-8');
+    }
+    return blog;
   } catch {
     return null;
   }
 }
 
 export async function generateMetadata({ params }) {
-  const blog = await getBlogBySlug(params.slug);
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
 
   if (!blog) return {};
 
@@ -42,12 +49,14 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const blog = await getBlogBySlug(params.slug);
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
 
   return (
     <>
       <Navbar />
-      <BlogDetail blog={blog} />
+      <BlogDetail blog={blog} imgBase={IMG_BASE} />
+      <Footer />
     </>
   );
 }

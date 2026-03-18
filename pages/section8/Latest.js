@@ -1,21 +1,30 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Latest() {
-  const news = [
-    {
-      id: 1,
-      date: "November 22, 2024",
-      title: "The Role of Technology in the Growth of UAE's Business Sector",
-      image: "/latest-news-img-1.png",
-    },
-    {
-      id: 2,
-      date: "November 22, 2024",
-      title: "The role of businesses in growing the sustainability in the UAE",
-      image: "/latest-news-img-2.png",
-    },
-  ];
+const API_BASE = "https://newcrm.ewbsbusiness.ae/api/v1";
+const IMG_BASE = "https://newcrm.ewbsbusiness.ae";
+
+async function getLatestBlogs() {
+  try {
+    const res = await fetch(`${API_BASE}/Blog`, { next: { revalidate: 3600 } });
+    if (!res.ok) return [];
+    const json = await res.json();
+    if (!json.status || !Array.isArray(json.data)) return [];
+    return json.data.slice(0, 2);
+  } catch {
+    return [];
+  }
+}
+
+function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  });
+}
+
+export default async function Latest() {
+  const blogs = await getLatestBlogs();
 
   const ArrowIcon = () => (
     <svg
@@ -70,24 +79,27 @@ export default function Latest() {
 
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-left">
-              {news.map((item) => (
-                <div
+              {blogs.map((item) => (
+                <Link
                   key={item.id}
+                  href={`/Blog/${item.slug}`}
                   className="bg-white rounded-3xl overflow-hidden shadow-lg flex flex-col group cursor-pointer"
                 >
                   {/* Card Text Area */}
                   <div className="p-6 md:p-8 pb-4 md:pb-6">
-                    <p className="text-gray-400 text-base md:text-lg xl:text-base 2xl:text-lg mb-3">{item.date}</p>
+                    <p className="text-gray-400 text-base md:text-lg xl:text-base 2xl:text-lg mb-3">
+                      {formatDate(item.publishedAt)}
+                    </p>
                     <h3 className="text-[var(--bg-red)] text-2xl md:text-3xl xl:text-2xl 2xl:text-4xl font-medium leading-snug group-hover:underline decoration-2 underline-offset-4">
-                      {item.title}
+                      {item.blogTitle}
                     </h3>
                   </div>
 
                   {/* Card Image Area */}
                   <div className="relative w-full h-[250px] sm:h-[300px] bg-gray-200 mt-auto">
                     <Image
-                      src={item.image}
-                      alt={item.title}
+                      src={`${IMG_BASE}${item.mainImage}`}
+                      alt={item.imageAlt || item.blogTitle}
                       fill
                       className="object-cover"
                     />
@@ -97,7 +109,7 @@ export default function Latest() {
                       <ArrowIcon />
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
