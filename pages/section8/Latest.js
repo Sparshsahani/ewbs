@@ -78,7 +78,7 @@ export default async function Latest() {
             </div>
 
             {/* Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up">
               {blogs.map((item) => (
                 <Link
                   key={item.id}

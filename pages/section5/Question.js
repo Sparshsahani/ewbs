@@ -52,7 +52,7 @@ export default function Question() {
           </div>
 
           {/* right column - accordion */}
-          <div data-aos="fade-left" className="w-full md:w-2/3 flex flex-col gap-4 mt-8 md:mt-0">
+          <div data-aos="fade-up" className="w-full md:w-2/3 flex flex-col gap-4 mt-8 md:mt-0">
             {faqs.map((item, idx) => (
               <div key={idx} className="border-b border-gray-200 last:border-0">
                 <button

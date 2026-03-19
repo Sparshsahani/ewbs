@@ -103,7 +103,7 @@ export default function Blog() {
                       <h3 className="text-[15px] font-medium text-gray-500 uppercase tracking-widest mb-3">
                         {blog.categoryName || blog.category || "MARKET TRENDS"}
                       </h3>
-                      <Link href={`/Blog/${blog.slug}`}>
+                      <Link href={`/Blog/${blog.slug}`} target="_blank">
                         <h2 className="text-[28px] sm:text-[32px] font-bold text-[#E32128] hover:text-red-700 cursor-pointer pr-16 leading-tight">
                           {blog.blogTitle}
                         </h2>

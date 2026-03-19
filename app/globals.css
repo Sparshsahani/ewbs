@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "aos/dist/aos.css";
 
 :root {
@@ -52,3 +53,5 @@ html {
 .group:hover .animate-marquee {
   animation-play-state: paused;
 }
+
+
