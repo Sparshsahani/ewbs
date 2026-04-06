@@ -97,12 +97,14 @@ export default async function Latest() {
 
                   {/* Card Image Area */}
                   <div className="relative w-full h-[250px] sm:h-[300px] bg-gray-200 mt-auto">
+                    {item.mainImage && (
                     <Image
                       src={`${IMG_BASE}${item.mainImage}`}
                       alt={item.imageAlt || item.blogTitle}
                       fill
                       className="object-cover"
                     />
+                    )}
 
                     {/* Circular Arrow Button overlaying the image */}
                     <div className="absolute bottom-6 right-6 bg-white text-[var(--bg-red)] rounded-full w-10 h-10 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">

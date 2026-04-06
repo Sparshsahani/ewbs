@@ -30,14 +30,22 @@ export default function Blog() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const blogsRes = await fetch(`${API_BASE}/Blog`);
+        const listRes = await fetch(`${API_BASE}/Blog`);
+        if (!listRes.ok) return;
+        const listJson = await listRes.json();
+        if (!listJson.status || !listJson.data) return;
 
-        if (blogsRes.ok) {
-          const blogsJson = await blogsRes.json();
-          if (blogsJson.status && blogsJson.data) {
-            setAllBlogs(blogsJson.data);
-          }
-        }
+        // List API only returns basic fields (no slug/mainImage/category).
+        // Fetch full detail for each blog in parallel.
+        const details = await Promise.all(
+          listJson.data.map((b) =>
+            fetch(`${API_BASE}/Blog/GetById/${b.id}`)
+              .then((r) => (r.ok ? r.json() : null))
+              .then((j) => (j && j.status ? j.data : null))
+              .catch(() => null)
+          )
+        );
+        setAllBlogs(details.filter(Boolean));
       } catch (err) {
         console.error("Failed to fetch blog data:", err);
       } finally {
@@ -53,13 +61,13 @@ export default function Blog() {
       ? allBlogs
       : allBlogs.filter(
           (b) =>
-            (b.categoryName || b.category || "")
-              .toLowerCase()
-              .trim() === activeCategory.toLowerCase().trim()
+            (b.blogCategory || b.categoryName || b.category || "")
+              .replace(/\s/g, "")
+              .toLowerCase() === activeCategory.replace(/\s/g, "").toLowerCase()
         );
 
   const recentBlogs = [...allBlogs]
-    .sort((a, b) => new Date(b.publishedDate || b.createdDate || 0) - new Date(a.publishedDate || a.createdDate || 0))
+    .sort((a, b) => new Date(b.publishedAt || b.createdAt || 0) - new Date(a.publishedAt || a.createdAt || 0))
     .slice(0, 4);
 
   return (
@@ -96,12 +104,12 @@ export default function Blog() {
                         className="w-full h-auto object-cover aspect-[16/9] sm:aspect-[21/9]"
                       />
                       <div className="absolute bottom-5 left-6 bg-white px-4 py-1.5 rounded text-sm font-semibold text-[#E32128]">
-                        {formatDate(blog.publishedDate || blog.createdDate)}
+                        {formatDate(blog.publishedAt || blog.createdAt)}
                       </div>
                     </div>
                     <div className="p-8 sm:p-10 relative">
                       <h3 className="text-[15px] font-medium text-gray-500 uppercase tracking-widest mb-3">
-                        {blog.categoryName || blog.category || "MARKET TRENDS"}
+                        {blog.blogCategory || blog.categoryName || blog.category || "MARKET TRENDS"}
                       </h3>
                       <Link href={`/Blog/${blog.slug}`} target="_blank">
                         <h2 className="text-[28px] sm:text-[32px] font-bold text-[#E32128] hover:text-red-700 cursor-pointer pr-16 leading-tight">
@@ -166,7 +174,7 @@ export default function Blog() {
                       </div>
                       <div>
                         <p className="text-[13px] text-gray-500 mb-1.5">
-                          {formatDate(blog.publishedDate || blog.createdDate)}
+                          {formatDate(blog.publishedAt || blog.createdAt)}
                         </p>
                         <Link href={`/Blog/${blog.slug}`}>
                           <h4 className="text-[17px] font-bold text-[#E32128] group-hover:text-red-700 leading-snug line-clamp-2">

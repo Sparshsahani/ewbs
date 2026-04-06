@@ -28,15 +28,24 @@ export default function BlogDetail({ blog, imgBase }) {
     async function fetchRecent() {
       try {
         const res = await fetch(`${API_BASE}/Blog`);
-        if (res.ok) {
-          const json = await res.json();
-          if (json.status && json.data) {
-            const sorted = [...json.data]
-              .sort((a, b) => new Date(b.publishedDate || b.createdDate || 0) - new Date(a.publishedDate || a.createdDate || 0))
-              .slice(0, 4);
-            setRecentBlogs(sorted);
-          }
-        }
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.status || !json.data) return;
+
+        // List API returns no slug/mainImage — fetch full details in parallel
+        const details = await Promise.all(
+          json.data.map((b) =>
+            fetch(`${API_BASE}/Blog/GetById/${b.id}`)
+              .then((r) => (r.ok ? r.json() : null))
+              .then((j) => (j && j.status ? j.data : null))
+              .catch(() => null)
+          )
+        );
+        const sorted = details
+          .filter(Boolean)
+          .sort((a, b) => new Date(b.publishedAt || b.createdAt || 0) - new Date(a.publishedAt || a.createdAt || 0))
+          .slice(0, 4);
+        setRecentBlogs(sorted);
       } catch (err) {
         console.error("Failed to fetch recent blogs", err);
       }
@@ -149,7 +158,7 @@ export default function BlogDetail({ blog, imgBase }) {
                     </div>
                     <div>
                       <p className="text-[13px] text-gray-500 mb-1.5">
-                        {formatDate(b.publishedDate || b.createdDate)}
+                        {formatDate(b.publishedAt || b.createdAt)}
                       </p>
                       <Link href={`/Blog/${b.slug}`}>
                         <h4 className="text-[17px] font-bold text-[#E32128] group-hover:text-red-700 leading-snug line-clamp-2">
