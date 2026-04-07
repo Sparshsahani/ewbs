@@ -79,8 +79,8 @@ export default function DubaiMainland() {
                 plans={[
                     {
                         title: "Professional Licence",
-                        currency: "INR",
-                        price: "346,895",
+                        currency: "AED",
+                        price: "13,999",
                         features: [
                             "Professional & Services License (LLC)",
                             "Company Name Approval",
@@ -100,8 +100,8 @@ export default function DubaiMainland() {
                     },
                     {
                         title: "Commercial Licence",
-                        currency: "INR",
-                        price: "359,310",
+                        currency: "AED",
+                        price: "14,500",
                         features: [
                             "Trading Commercial License (LLC)",
                             "Company Name Approval",
@@ -121,8 +121,8 @@ export default function DubaiMainland() {
                     },
                     {
                         title: "General Trading",
-                        currency: "INR",
-                        price: "805,350",
+                        currency: "AED",
+                        price: "32,500",
                         features: [
                             "General Trading License (LLC)",
                             "Company Name Approval",

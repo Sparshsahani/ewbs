@@ -79,8 +79,8 @@ export default function AmcFreezone() {
                 plans={[
                     {
                         title: "0 Visa",
-                        currency: "INR",
-                        price: "210,460",
+                        currency: "AED",
+                        price: "8,500",
                         features: [
                             "Licence Zero Visa Allocation",
                             "Free Dubai Office Address",
@@ -93,8 +93,8 @@ export default function AmcFreezone() {
                     },
                     {
                         title: "1 Visa",
-                        currency: "INR",
-                        price: "284,740",
+                        currency: "AED",
+                        price: "11,500",
                         features: [
                             "Licence Zero Visa Allocation",
                             "Free Dubai Office Address",
@@ -107,8 +107,8 @@ export default function AmcFreezone() {
                     },
                     {
                         title: "2 Visa",
-                        currency: "INR",
-                        price: "359,050",
+                        currency: "AED",
+                        price: "14,500",
                         features: [
                             "Licence Zero Visa Allocation",
                             "Free Dubai Office Address",
@@ -121,8 +121,8 @@ export default function AmcFreezone() {
                     },
                     {
                         title: "3 Visa",
-                        currency: "INR",
-                        price: "433,300",
+                        currency: "AED",
+                        price: "17,500",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -137,8 +137,8 @@ export default function AmcFreezone() {
                     },
                     {
                         title: "4 Visa",
-                        currency: "INR",
-                        price: "373,950",
+                        currency: "AED",
+                        price: "15,103",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -153,8 +153,8 @@ export default function AmcFreezone() {
                     },
                     {
                         title: "5 Visa",
-                        currency: "INR",
-                        price: "401,681",
+                        currency: "AED",
+                        price: "16,223",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",

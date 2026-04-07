@@ -76,8 +76,8 @@ export default function ShamsFreezone() {
                 plans={[
                     {
                         title: "0 Visa",
-                        currency: "INR",
-                        price: "142,370",
+                        currency: "AED",
+                        price: "5,750",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -92,8 +92,8 @@ export default function ShamsFreezone() {
                     },
                     {
                         title: "1 Visa",
-                        currency: "INR",
-                        price: "290,757",
+                        currency: "AED",
+                        price: "11,743",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -108,8 +108,8 @@ export default function ShamsFreezone() {
                     },
                     {
                         title: "2 Visa",
-                        currency: "INR",
-                        price: "318,488",
+                        currency: "AED",
+                        price: "12,863",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -124,8 +124,8 @@ export default function ShamsFreezone() {
                     },
                     {
                         title: "3 Visa",
-                        currency: "INR",
-                        price: "346,219",
+                        currency: "AED",
+                        price: "13,983",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -140,8 +140,8 @@ export default function ShamsFreezone() {
                     },
                     {
                         title: "4 Visa",
-                        currency: "INR",
-                        price: "373,950",
+                        currency: "AED",
+                        price: "15,103",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",
@@ -156,8 +156,8 @@ export default function ShamsFreezone() {
                     },
                     {
                         title: "5 Visa",
-                        currency: "INR",
-                        price: "401,681",
+                        currency: "AED",
+                        price: "16,223",
                         features: [
                             "Business Bank Account Assistance",
                             "Package Excludes Visa Cost",

@@ -88,8 +88,8 @@ export default function RakezFreezone() {
                 plans={[
                     {
                         title: "1 Visa",
-                        currency: "INR",
-                        price: "247,600",
+                        currency: "AED",
+                        price: "10,000",
                         features: [
                             "Business License for 1 year",
                             "1 Investor visa Included",
@@ -100,13 +100,13 @@ export default function RakezFreezone() {
                             "Free Company Stamp",
                             "Free P.O.Box",
                         ],
-                        ctaText: "Pay Upfront INR 99.015 for 1 Visa",
+                        ctaText: "Pay Upfront AED 99.015 for 1 Visa",
                         ctaLink: "/contact",
                     },
                     {
                         title: "2 Visa",
-                        currency: "INR",
-                        price: "396,160",
+                        currency: "AED",
+                        price: "16,000",
                         features: [
                             "Business License for 1 year",
                             "2 Investor visas for 2 years",
@@ -117,13 +117,13 @@ export default function RakezFreezone() {
                             "Free Company Stamp",
                             "Free P.O.Box",
                         ],
-                        ctaText: "Pay Upfront INR 99.015 for 2 Visa ",
+                        ctaText: "Pay Upfront AED 99.015 for 2 Visa ",
                         ctaLink: "/contact",
                     },
                     {
                         title: "4 Visa",
-                        currency: "INR",
-                        price: "581,860",
+                        currency: "AED",
+                        price: "23,500",
                         features: [
                             "4 Investor visa Included",
                             "4 Investor visas for 2 years",
@@ -132,7 +132,7 @@ export default function RakezFreezone() {
                             "Installments based on eligibility",
                             "Inclusive of benefits from the other 2 packages",
                         ],
-                        ctaText: "Pay Upfront INR 99.015 for 4 Visa ",
+                        ctaText: "Pay Upfront AED 99.015 for 4 Visa ",
                         ctaLink: "/contact",
                     },
                 ]}

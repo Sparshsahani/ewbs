@@ -76,8 +76,8 @@ export default function SpcFreezone() {
                 plans={[
                     {
                         title: "0 Visa",
-                        currency: "INR",
-                        price: "161,005",
+                        currency: "AED",
+                        price: "6,500",
                         features: [
                             "Combine any activities (Service, Commercial and Ecommerce)",
                             "Up to 5 Shareholders",
@@ -89,8 +89,8 @@ export default function SpcFreezone() {
                     },
                     {
                         title: "1 Visa",
-                        currency: "INR",
-                        price: "198,160",
+                        currency: "AED",
+                        price: "8,000",
                         features: [
                             "Combine any activities (Service, Commercial and Ecommerce)",
                             "Up to 5 Shareholders",
@@ -102,8 +102,8 @@ export default function SpcFreezone() {
                     },
                     {
                         title: "3 Year Visa",
-                        currency: "INR",
-                        price: "371,550",
+                        currency: "AED",
+                        price: "15,000",
                         features: [
                             "1 year license with a 3 year visa",
                             "Combine any activities (Service, Commercial and Ecommerce)",

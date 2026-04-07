@@ -75,8 +75,8 @@ export default function IfzaFreezone() {
                 plans={[
                     {
                         title: "0 Visa",
-                        currency: "INR",
-                        price: "319,533",
+                        currency: "AED",
+                        price: "12,900",
                         features: [
                             "Licence Zero Visa Allocation",
                             "Free Dubai Office Address",
@@ -89,8 +89,8 @@ export default function IfzaFreezone() {
                     },
                     {
                         title: "1 Visa",
-                        currency: "INR",
-                        price: "369,073",
+                        currency: "AED",
+                        price: "14,900",
                         features: [
                             "Licence 1 Visa Allocation",
                             "Free Dubai Office Address",
@@ -103,8 +103,8 @@ export default function IfzaFreezone() {
                     },
                     {
                         title: "2 Visa",
-                        currency: "INR",
-                        price: "418,613",
+                        currency: "AED",
+                        price: "16,900",
                         features: [
                             "Licence 2 Visa Allocation",
                             "Free Dubai Office Address",
@@ -117,8 +117,8 @@ export default function IfzaFreezone() {
                     },
                     {
                         title: "3 Visa",
-                        currency: "INR",
-                        price: "468,153",
+                        currency: "AED",
+                        price: "18,900",
                         features: [
                             "Licence 3 Visa Allocation",
                             "Free Dubai Office Address",
@@ -131,8 +131,8 @@ export default function IfzaFreezone() {
                     },
                     {
                         title: "4 Visa",
-                        currency: "INR",
-                        price: "517,693",
+                        currency: "AED",
+                        price: "20,900",
                         features: [
                             "Licence 4 Visa Allocation",
                             "Free Dubai Office Address",
@@ -145,8 +145,8 @@ export default function IfzaFreezone() {
                     },
                     {
                         title: "5 Visa",
-                        currency: "INR",
-                        price: "567,233",
+                        currency: "AED",
+                        price: "22,900",
                         features: [
                             "Licence 5 Visa Allocation",
                             "Free Dubai Office Address",
