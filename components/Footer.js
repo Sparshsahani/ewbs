@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 import LogoComp from "./LogoComp";
 import { useCurrency } from "@/lib/useCurrency";
+import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const { countryCode } = useCurrency();
@@ -113,6 +115,24 @@ export default function Footer() {
                     <p className="font-medium text-gray-700">
                       Contact : +91 8423111088
                     </p>
+                    {/* Social Icons */}
+                    <div className="flex items-center gap-4 pt-5">
+                      <Link href="https://www.facebook.com/EwbsBusinessServicesLLC/" target="_blank" aria-label="Facebook">
+                        <FaFacebookF className="w-5 h-5 text-[var(--bg-red)] hover:opacity-75 transition-opacity" />
+                      </Link>
+                      <Link href="https://www.instagram.com/ewbsbusiness/" target="_blank" aria-label="Instagram">
+                        <FaInstagram className="w-5 h-5 text-[var(--bg-red)] hover:opacity-75 transition-opacity" />
+                      </Link>
+                      <Link href="https://www.youtube.com/channel/UC1g7aWUXRsTZJwFwv04STcg" target="_blank" aria-label="YouTube">
+                        <FaYoutube className="w-5 h-5 text-[var(--bg-red)] hover:opacity-75 transition-opacity" />
+                      </Link>
+                      <Link href="https://www.linkedin.com/company/ewbs-business-services" target="_blank" aria-label="LinkedIn">
+                        <FaLinkedinIn className="w-5 h-5 text-[var(--bg-red)] hover:opacity-75 transition-opacity" />
+                      </Link>
+                      <Link href="https://x.com/EwbsBusiness" target="_blank" aria-label="Twitter">
+                        <FaXTwitter className="w-5 h-5 text-[var(--bg-red)] hover:opacity-75 transition-opacity" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </>

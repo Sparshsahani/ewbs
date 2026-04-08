@@ -47,13 +47,13 @@ export default function RootLayout({ children }) {
 
         {/* Fixed WhatsApp Button */}
         <a
-          href="https://wa.me/1234567890" // Replace with your actual WhatsApp number
+          href="https://wa.me/971509940442" // Replace with your actual WhatsApp number
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-2 left-8 z-50 bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300"
+          className="fixed bottom-20 left-20 z-50 bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300"
           aria-label="Chat on WhatsApp"
         >
-          <FaWhatsapp className="text-3xl" />
+          <FaWhatsapp className="text-6xl" />
         </a>
       </body>
     </html>

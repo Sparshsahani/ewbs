@@ -1,30 +1,47 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const API_BASE = "https://newcrm.ewbsbusiness.ae/api/v1";
 const IMG_BASE = "https://newcrm.ewbsbusiness.ae";
 
-async function getLatestBlogs() {
-  try {
-    const res = await fetch(`${API_BASE}/Blog`, { next: { revalidate: 3600 } });
-    if (!res.ok) return [];
-    const json = await res.json();
-    if (!json.status || !Array.isArray(json.data)) return [];
-    return json.data.slice(0, 2);
-  } catch {
-    return [];
-  }
-}
-
 function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric',
+  if (!dateStr) return "";
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 
-export default async function Latest() {
-  const blogs = await getLatestBlogs();
+export default function Latest() {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const res = await fetch(`${API_BASE}/Blog`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.status || !Array.isArray(json.data)) return;
+
+        const top2 = json.data.slice(0, 2);
+        const details = await Promise.all(
+          top2.map((b) =>
+            fetch(`${API_BASE}/Blog/GetById/${b.id}`)
+              .then((r) => (r.ok ? r.json() : null))
+              .then((j) => (j && j.status ? j.data : null))
+              .catch(() => null)
+          )
+        );
+        setBlogs(details.filter(Boolean));
+      } catch (err) {
+        console.error("Failed to fetch latest blogs:", err);
+      }
+    }
+    fetchBlogs();
+  }, []);
 
   const ArrowIcon = () => (
     <svg
@@ -102,7 +119,7 @@ export default async function Latest() {
                       src={`${IMG_BASE}${item.mainImage}`}
                       alt={item.imageAlt || item.blogTitle}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                     )}
 

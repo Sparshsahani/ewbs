@@ -101,7 +101,7 @@ export default function Blog() {
                       <img
                         src={blog.mainImage ? `${IMG_BASE}${blog.mainImage}` : "/images/gallery/services-banner.jpg"}
                         alt={blog.imageAlt || blog.blogTitle}
-                        className="w-full h-auto object-cover aspect-[16/9] sm:aspect-[21/9]"
+                        className="w-full h-auto object-cover object-top aspect-[16/9] sm:aspect-[21/9]"
                       />
                       <div className="absolute bottom-5 left-6 bg-white px-4 py-1.5 rounded text-sm font-semibold text-[#E32128]">
                         {formatDate(blog.publishedAt || blog.createdAt)}
@@ -169,7 +169,7 @@ export default function Blog() {
                         <img
                           src={blog.mainImage ? `${IMG_BASE}${blog.mainImage}` : "/images/gallery/services-banner.jpg"}
                           alt={blog.imageAlt || blog.blogTitle}
-                          className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
                         />
                       </div>
                       <div>
