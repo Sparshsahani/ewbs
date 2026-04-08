@@ -18,8 +18,10 @@ async function getLatestBlogs() {
 }
 
 function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric',
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 
@@ -57,7 +59,10 @@ export default async function Latest() {
         <div className="relative z-10 pt-12 md:pt-20 pb-16 md:pb-20">
           <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-5 xl:px-30 2xl:px-20">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4" data-aos="fade-right">
+            <div
+              className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4"
+              data-aos="fade-right"
+            >
               <div>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl font-bold text-[var(--bg-red)] mb-2">
                   Latest News.
@@ -78,7 +83,10 @@ export default async function Latest() {
             </div>
 
             {/* Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up">
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+              data-aos="fade-up"
+            >
               {blogs.map((item) => (
                 <Link
                   key={item.id}
@@ -98,12 +106,12 @@ export default async function Latest() {
                   {/* Card Image Area */}
                   <div className="relative w-full h-[250px] sm:h-[300px] bg-gray-200 mt-auto">
                     {item.mainImage && (
-                    <Image
-                      src={`${IMG_BASE}${item.mainImage}`}
-                      alt={item.imageAlt || item.blogTitle}
-                      fill
-                      className="object-cover"
-                    />
+                      <Image
+                        src={`${IMG_BASE}${item.mainImage}`}
+                        alt={item.imageAlt || item.blogTitle}
+                        fill
+                        className="object-cover"
+                      />
                     )}
 
                     {/* Circular Arrow Button overlaying the image */}
