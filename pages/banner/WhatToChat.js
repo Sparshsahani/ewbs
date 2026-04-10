@@ -33,7 +33,7 @@ export default function WhatToChat() {
 
           {/* Call To Action Button */}
           <div className="flex-shrink-0">
-            <Link href="/contact" className="group relative flex items-center justify-center w-36 h-36 md:w-48 md:h-48 bg-[var(--button-color)] rounded-full transition-transform hover:scale-105 duration-300 shadow-lg text-black">
+            <Link href="/ContactUs" className="group relative flex items-center justify-center w-36 h-36 md:w-48 md:h-48 bg-[var(--button-color)] rounded-full transition-transform hover:scale-105 duration-300 shadow-lg text-black">
 
               {/* Rotating Text Container */}
               <div className="absolute inset-0 animate-[spin_10s_linear_infinite]">
