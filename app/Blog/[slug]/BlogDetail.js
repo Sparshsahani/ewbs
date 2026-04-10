@@ -80,7 +80,7 @@ export default function BlogDetail({ blog, imgBase }) {
               <img
                 src={`${imgBase}${blog.mainImage}`}
                 alt={blog.imageAlt || blog.blogTitle}
-                className="w-full rounded-[2rem] mb-8 object-cover aspect-[16/9] sm:aspect-[21/9]"
+                className="w-full rounded-[2rem] mb-8 object-cover object-top aspect-[16/9] sm:aspect-[21/9]"
               />
             )}
 
