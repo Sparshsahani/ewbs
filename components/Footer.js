@@ -146,10 +146,10 @@ export default function Footer() {
                 </h3>
                 <div className="border-b border-gray-300 pb-4 max-w-md space-y-2">
                   <p className="leading-relaxed text-gray-500">
-                    123 dummy street, Lahore, Pakistan
+                     First Floor, Plaza 116 Main Boulevard, <br /> Phase 6 C, Dha Lahore
                   </p>
                   <p className="font-medium text-gray-700">
-                    Contact : +92 300 0000000
+                    Contact : +92 300 8559901
                   </p>
                 </div>
               </div>
