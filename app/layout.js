@@ -30,6 +30,9 @@ export const metadata = {
     google: "-I7MipM5wwtv2ew_33tTD3eapZ0xMWo6aHC6yjso774",
     facebook: "q9lfzu2yuac4gimhsv4z3hs7r5lqda",
   },
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
