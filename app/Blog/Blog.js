@@ -6,8 +6,8 @@ import WhatToChat from "@/pages/banner/WhatToChat";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-const API_BASE = "https://api.ewbsbusiness.ae/api/v1";
-const IMG_BASE = "https://api.ewbsbusiness.ae";
+const API_BASE = process.env.NEXT_PUBLIC_BLOG_API_URL || "https://api.ewbsbusiness.ae/api/v1";
+const IMG_BASE = process.env.NEXT_PUBLIC_BLOG_IMG_BASE || "https://api.ewbsbusiness.ae";
 
 function formatDate(dateStr) {
   if (!dateStr) return "";

@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'newcrm.ewbsbusiness.ae',
       },
+      {
+        protocol: 'https',
+        hostname: 'api.ewbsbusiness.ae',
+      },
     ],
   },
 };

@@ -6,7 +6,7 @@ import WhatToChat from "@/pages/banner/WhatToChat";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-const API_BASE = "https://newcrm.ewbsbusiness.ae/api/v1";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://newcrm.ewbsbusiness.ae/api/v1";
 
 function formatDate(dateStr) {
   if (!dateStr) return "";
