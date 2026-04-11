@@ -16,7 +16,8 @@ function formatDate(dateStr) {
 }
 
 export default function Blog() {
-  const [allBlogs, setAllBlogs] = useState([]);
+  const [basicBlogs, setBasicBlogs] = useState([]);
+  const [blogDetails, setBlogDetails] = useState({});
   const [categories] = useState([
     "All",
     "FREEZONE",
@@ -25,7 +26,8 @@ export default function Blog() {
     "MARKET TRENDS"
   ]);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [loading, setLoading] = useState(true);
+  const [loadingList, setLoadingList] = useState(true);
+  const [loadingDetails, setLoadingDetails] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,26 +37,50 @@ export default function Blog() {
         const listJson = await listRes.json();
         if (!listJson.status || !listJson.data) return;
 
-        // List API only returns basic fields (no slug/mainImage/category).
-        // Fetch full detail for each blog in parallel.
-        const details = await Promise.all(
-          listJson.data.map((b) =>
-            fetch(`${API_BASE}/Blog/GetById/${b.id}`)
-              .then((r) => (r.ok ? r.json() : null))
-              .then((j) => (j && j.status ? j.data : null))
-              .catch(() => null)
-          )
-        );
-        setAllBlogs(details.filter(Boolean));
+        setBasicBlogs(listJson.data);
       } catch (err) {
         console.error("Failed to fetch blog data:", err);
       } finally {
-        setLoading(false);
+        setLoadingList(false);
       }
     }
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (basicBlogs.length === 0) {
+      setLoadingDetails(false);
+      return;
+    }
+
+    let cancelled = false;
+    let remaining = basicBlogs.length;
+    setLoadingDetails(true);
+
+    basicBlogs.forEach((b) => {
+      fetch(`${API_BASE}/Blog/GetById/${b.id}`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => {
+          if (j && j.status && !cancelled) {
+            setBlogDetails((prev) => ({ ...prev, [b.id]: j.data }));
+          }
+        })
+        .catch(() => null)
+        .finally(() => {
+          remaining -= 1;
+          if (!cancelled && remaining <= 0) {
+            setLoadingDetails(false);
+          }
+        });
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [basicBlogs]);
+
+  const allBlogs = basicBlogs.map((b) => blogDetails[b.id] || b);
 
   const filteredBlogs =
     activeCategory === "All"
@@ -80,7 +106,7 @@ export default function Blog() {
       />
 
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-5 xl:px-30 2xl:px-20 py-12">
-        {loading ? (
+        {loadingList ? (
           <div className="flex justify-center items-center min-h-[300px]">
             <div className="animate-spin rounded-full h-14 w-14 border-4 border-[#E32128] border-t-transparent"></div>
           </div>
@@ -92,42 +118,57 @@ export default function Blog() {
               {filteredBlogs.length === 0 ? (
                 <p className="text-gray-500 text-center py-16 text-lg">No blogs found in this category.</p>
               ) : (
-                filteredBlogs.map((blog) => (
-                  <div
-                    key={blog.id || blog.slug}
-                    className="bg-[#f5f5f5] rounded-[2rem] overflow-hidden transition duration-300"
-                  >
-                    <div className="relative w-full">
-                      <img
-                        src={blog.mainImage ? `${IMG_BASE}${blog.mainImage}` : "/images/gallery/services-banner.jpg"}
-                        alt={blog.imageAlt || blog.blogTitle}
-                        className="w-full h-auto object-cover object-top aspect-[16/9] sm:aspect-[21/9]"
-                      />
-                      <div className="absolute bottom-5 left-6 bg-white px-4 py-1.5 rounded text-sm font-semibold text-[#E32128]">
-                        {formatDate(blog.publishedAt || blog.createdAt)}
+                filteredBlogs.map((blog) => {
+                  const isPlaceholder = !blog.slug || !blog.mainImage || !blog.blogTitle;
+                  const title = blog.blogTitle || blog.title || "Loading blog...";
+                  const category = blog.blogCategory || blog.categoryName || blog.category || "MARKET TRENDS";
+                  const dateText = formatDate(blog.publishedAt || blog.createdAt);
+
+                  return (
+                    <div
+                      key={blog.id || blog.slug}
+                      className={`bg-[#f5f5f5] rounded-[2rem] overflow-hidden transition duration-300 ${isPlaceholder ? "animate-pulse" : ""}`}
+                    >
+                      <div className="relative w-full">
+                        <img
+                          src={blog.mainImage ? `${IMG_BASE}${blog.mainImage}` : "/images/gallery/services-banner.jpg"}
+                          alt={blog.imageAlt || title}
+                          className={`w-full h-auto object-cover object-top aspect-[16/9] sm:aspect-[21/9] ${isPlaceholder ? "opacity-60" : ""}`}
+                        />
+                        <div className="absolute bottom-5 left-6 bg-white px-4 py-1.5 rounded text-sm font-semibold text-[#E32128]">
+                          {dateText || "Loading date..."}
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-8 sm:p-10 relative">
-                      <h3 className="text-[15px] font-medium text-gray-500 uppercase tracking-widest mb-3">
-                        {blog.blogCategory || blog.categoryName || blog.category || "MARKET TRENDS"}
-                      </h3>
-                      <Link href={`/Blog/${blog.slug}`} target="_blank">
-                        <h2 className="text-[28px] sm:text-[32px] font-bold text-[#E32128] hover:text-red-700 cursor-pointer pr-16 leading-tight">
-                          {blog.blogTitle}
-                        </h2>
-                      </Link>
-                      <div className="absolute bottom-8 right-8">
-                        <Link href={`/Blog/${blog.slug}`}>
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-105 transition-all cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 text-[#E32128]">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                            </svg>
+                      <div className="p-8 sm:p-10 relative">
+                        <h3 className="text-[15px] font-medium text-gray-500 uppercase tracking-widest mb-3">
+                          {category}
+                        </h3>
+                        {blog.slug ? (
+                          <Link href={`/Blog/${blog.slug}`} target="_blank">
+                            <h2 className="text-[28px] sm:text-[32px] font-bold text-[#E32128] hover:text-red-700 cursor-pointer pr-16 leading-tight">
+                              {title}
+                            </h2>
+                          </Link>
+                        ) : (
+                          <h2 className="text-[28px] sm:text-[32px] font-bold text-[#E32128] pr-16 leading-tight">
+                            {title}
+                          </h2>
+                        )}
+                        {blog.slug ? (
+                          <div className="absolute bottom-8 right-8">
+                            <Link href={`/Blog/${blog.slug}`}>
+                              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-105 transition-all cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 text-[#E32128]">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                                </svg>
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
+                        ) : null}
                       </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
 
