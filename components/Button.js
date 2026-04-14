@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Button({ bgcolor, className = "", children = "Get In Touch", href, ...rest }) {
   const btn = (
     <button
-      className={`${bgcolor}  px-8 py-3 lg:px-5 rounded-full w-full`}
+      className={`${bgcolor}  px-0 py-2 md:px-8 md:py-3 lg:px-5 rounded-full w-full`}
       {...rest}
     >
       {children}

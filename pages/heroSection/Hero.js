@@ -12,11 +12,11 @@ export default function Hero({ bgcolor = ` bg-[var(--button-color)]` }) {
             <h1 className="main-heading font-semibold leading-tight">
               Ready to Start <br /> Your Business <br /> in Dubai?
             </h1>
-            <p className="paragraph  leading-relaxed">
+            <p className="max-sm:w-45 paragraph  leading-relaxed">
               From idea to reality: UAE business setup simplified <br className="hidden md:block" />
               with EWBS expertise! #ewbsbusiness
             </p>
-            <Button bgcolor={bgcolor} className="w-40 md:w-44 lg:w-48 xl:w-50 text-base md:text-lg xl:text-xl 2xl:text-2xl text-black font-medium">
+              <Button href="/ContactUs" bgcolor={bgcolor} className="w-30 md:w-44 lg:w-48 xl:w-50 text-[14px] md:text-lg xl:text-xl 2xl:text-2xl text-black font-medium">
               Let&apos;s Talk →
             </Button>
           </div>

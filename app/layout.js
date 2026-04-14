@@ -149,10 +149,10 @@ export default function RootLayout({ children }) {
           href="https://wa.me/971509940442"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-10 left-10 z-50 bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300"
+          className="fixed bottom-10 left-5 md:left-10 z-50 bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300"
           aria-label="Chat on WhatsApp"
         >
-          <FaWhatsapp className="text-5xl" />
+          <FaWhatsapp className="text-3xl md:text-5xl" />
         </a>
 
       </body>

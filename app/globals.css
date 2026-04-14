@@ -54,4 +54,14 @@ html {
   animation-play-state: paused;
 }
 
+.hero-bg-mobile {
+  background-position: 95% center;
+}
+
+@media (min-width: 768px) {
+  .hero-bg-mobile {
+    background-position: center;
+  }
+}
+
 
