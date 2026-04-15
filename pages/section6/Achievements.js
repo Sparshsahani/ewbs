@@ -8,21 +8,25 @@ export default function Achievements() {
       id: 1,
       title: "EWBS Group teams up with Deccan Gladiators",
       images: "/images/media/news1.jpeg",
+      link: "https://www.khaleejtimes.com/kt-network/ewbs-group-teams-up-with-deccan-gladiators",
     },
     {
       id: 2,
       title: "EWBS leadership recognised at Golden Excellence Awards",
       images: "/images/media/news2.jpeg",
+      link: "https://www.khaleejtimes.com/kt-network/ewbs-leadership-recognised-at-golden-excellence-awards",
     },
     {
       id: 3,
       title: "EWBS Announces Launch Of Pioneering Service To Assist ...",
       images: "/images/media/news3.jpeg",
+      link: "https://markets.businessinsider.com/news/stocks/ewbs-announces-launch-of-pioneering-service-to-assist-emerging-business-owners-with-business-setup-in-dubai-1033584871",
     },
     {
       id: 4,
       title: "EWBS: Pioneering business expansion in the Emirates",
       images: "/images/media/news4.jpeg",
+      link: "https://www.khaleejtimes.com/kt-network/ewbs-pioneering-business-expansion-in-the-emirates",
     },
   ];
 
@@ -94,12 +98,12 @@ export default function Achievements() {
               <h3 className="text-white text-xl md:text-2xl xl:text-xl 2xl:text-2xl font-bold w-2/3 leading-tight">
                 {activeStory.title}
               </h3>
-              <button className="bg-white text-black px-3 py-1.5 rounded-full flex items-center text-sm font-bold">
+              <a href={activeStory.link} target="_blank" rel="noopener noreferrer" className="bg-white text-black px-3 py-1.5 rounded-full flex items-center text-sm font-bold">
                 View
                 <span className="ml-2 bg-[var(--bg-red)] text-white rounded-full w-6 h-6 flex items-center justify-center">
                   <ArrowIcon />
                 </span>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -172,19 +176,19 @@ export default function Achievements() {
 
                 <div className="flex justify-end mt-4">
                   {isActive ? (
-                    <button className="bg-white text-black px-3 py-1.5 rounded-full flex items-center text-sm font-bold">
+                    <a href={story.link} target="_blank" rel="noopener noreferrer" className="bg-white text-black px-3 py-1.5 rounded-full flex items-center text-sm font-bold">
                       View
                       <span className="ml-2 bg-[var(--bg-red)] text-white rounded-full w-6 h-6 flex items-center justify-center">
                         <ArrowIcon />
                       </span>
-                    </button>
+                    </a>
                   ) : (
-                    <button className="text-black flex items-center text-sm font-bold italic">
+                    <a href={story.link} target="_blank" rel="noopener noreferrer" className="text-black flex items-center text-sm font-bold italic">
                       View
                       <span className="ml-2 bg-[var(--bg-red)] text-white rounded-full w-6 h-6 flex items-center justify-center not-italic">
                         <ArrowIcon />
                       </span>
-                    </button>
+                    </a>
                   )}
                 </div>
               </div>
