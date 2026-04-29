@@ -29,6 +29,8 @@ export default function Navbar({
       ]
     },
     { label: "Services", href: "/business-setup-services-in-dubai", },
+    { label: "News", href: "/News" },
+    { label: "Gallery", href: "/Gallery" },
     { label: "Blog", href: "/Blog" },
     { label: "About Us", href: "/AboutUs" },
     { label: "Careers", href: "/Career" },

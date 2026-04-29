@@ -1,11 +1,11 @@
 import { getSeoData, buildMetadata } from '@/lib/getSeoData'
 import Navbar from '@/components/Navbar'
 import React from 'react'
-import News from './News'
+import Gallery from './Gallery'
 
-// Page ID 18 = News
+// Page ID 17 = Gallery
 export async function generateMetadata() {
-  const seo = await getSeoData(18);
+  const seo = await getSeoData(17);
   return buildMetadata(seo);
 }
 
@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <>
     <Navbar/>
-    <News/>
+    <Gallery/>
     </>
   )
 }
