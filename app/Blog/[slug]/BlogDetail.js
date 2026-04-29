@@ -6,7 +6,7 @@ import WhatToChat from "@/pages/banner/WhatToChat";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://newcrm.ewbsbusiness.ae/api/v1";
+const API_BASE = "https://api.ewbsbusiness.ae/api/v1";
 
 function formatDate(dateStr) {
   if (!dateStr) return "";
@@ -31,18 +31,7 @@ export default function BlogDetail({ blog, imgBase }) {
         if (!res.ok) return;
         const json = await res.json();
         if (!json.status || !json.data) return;
-
-        // List API returns no slug/mainImage — fetch full details in parallel
-        const details = await Promise.all(
-          json.data.map((b) =>
-            fetch(`${API_BASE}/Blog/GetById/${b.id}`)
-              .then((r) => (r.ok ? r.json() : null))
-              .then((j) => (j && j.status ? j.data : null))
-              .catch(() => null)
-          )
-        );
-        const sorted = details
-          .filter(Boolean)
+        const sorted = [...json.data]
           .sort((a, b) => new Date(b.publishedAt || b.createdAt || 0) - new Date(a.publishedAt || a.createdAt || 0))
           .slice(0, 4);
         setRecentBlogs(sorted);
@@ -151,8 +140,8 @@ export default function BlogDetail({ blog, imgBase }) {
                   <div key={b.id || b.slug} className="flex flex-col space-y-3 group cursor-pointer">
                     <div className="relative w-full rounded-[14px] overflow-hidden aspect-[16/9]">
                       <img
-                        src={b.mainImage ? `${imgBase}${b.mainImage}` : "/images/gallery/services-banner.jpg"}
-                        alt={b.imageAlt || b.blogTitle}
+                        src={(b.mainImage || b.image) ? `${imgBase}${b.mainImage || b.image}` : "/images/gallery/services-banner.jpg"}
+                        alt={b.imageAlt || b.blogTitle || b.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                       />
                     </div>
@@ -160,9 +149,9 @@ export default function BlogDetail({ blog, imgBase }) {
                       <p className="text-[13px] text-gray-500 mb-1.5">
                         {formatDate(b.publishedAt || b.createdAt)}
                       </p>
-                      <Link href={`/Blog/${b.slug}`}>
+                      <Link href={`/Blog/${b.slug || b.id}`}>
                         <h4 className="text-[17px] font-bold text-[#E32128] group-hover:text-red-700 leading-snug line-clamp-2">
-                          {b.blogTitle}
+                          {b.blogTitle || b.title}
                         </h4>
                       </Link>
                     </div>

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://newcrm.ewbsbusiness.ae/api/v1";
-const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE || "https://newcrm.ewbsbusiness.ae";
+const API_BASE = "https://api.ewbsbusiness.ae/api/v1";
+const IMG_BASE = "https://api.ewbsbusiness.ae";
 
 function formatDate(dateStr) {
   if (!dateStr) return "";
@@ -25,17 +25,7 @@ export default function Latest() {
         if (!res.ok) return;
         const json = await res.json();
         if (!json.status || !Array.isArray(json.data)) return;
-
-        const top2 = json.data.slice(0, 2);
-        const details = await Promise.all(
-          top2.map((b) =>
-            fetch(`${API_BASE}/Blog/GetById/${b.id}`)
-              .then((r) => (r.ok ? r.json() : null))
-              .then((j) => (j && j.status ? j.data : null))
-              .catch(() => null)
-          )
-        );
-        setBlogs(details.filter(Boolean));
+        setBlogs(json.data.slice(0, 2));
       } catch (err) {
         console.error("Failed to fetch latest blogs:", err);
       }
@@ -111,19 +101,19 @@ export default function Latest() {
                   {/* Card Text Area */}
                   <div className="p-6 md:p-8 pb-4 md:pb-6">
                     <p className="text-gray-400 text-base md:text-lg xl:text-base 2xl:text-lg mb-3">
-                      {formatDate(item.publishedAt)}
+                      {formatDate(item.publishedAt || item.createdAt)}
                     </p>
                     <h3 className="text-[var(--bg-red)] text-2xl md:text-3xl xl:text-2xl 2xl:text-4xl font-medium leading-snug group-hover:underline decoration-2 underline-offset-4">
-                      {item.blogTitle}
+                      {item.blogTitle || item.title}
                     </h3>
                   </div>
 
                   {/* Card Image Area */}
                   <div className="relative w-full h-[250px] sm:h-[300px] bg-gray-200 mt-auto">
-                    {item.mainImage && (
+                    {(item.mainImage || item.image) && (
                     <Image
-                      src={`${IMG_BASE}${item.mainImage}`}
-                      alt={item.imageAlt || item.blogTitle}
+                      src={`${IMG_BASE}${item.mainImage || item.image}`}
+                      alt={item.imageAlt || item.blogTitle || item.title}
                       fill
                       className="object-cover object-top"
                     />

@@ -16,8 +16,7 @@ function formatDate(dateStr) {
 }
 
 export default function Blog() {
-  const [basicBlogs, setBasicBlogs] = useState([]);
-  const [blogDetails, setBlogDetails] = useState({});
+  const [blogs, setBlogs] = useState([]);
   const [categories] = useState([
     "All",
     "FREEZONE",
@@ -27,72 +26,35 @@ export default function Blog() {
   ]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [loadingList, setLoadingList] = useState(true);
-  const [loadingDetails, setLoadingDetails] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const listRes = await fetch(`${API_BASE}/Blog`);
-        if (!listRes.ok) return;
-        const listJson = await listRes.json();
-        if (!listJson.status || !listJson.data) return;
-
-        setBasicBlogs(listJson.data);
+        const res = await fetch(`${API_BASE}/Blog`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.status || !json.data) return;
+        setBlogs(json.data);
       } catch (err) {
         console.error("Failed to fetch blog data:", err);
       } finally {
         setLoadingList(false);
       }
     }
-
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (basicBlogs.length === 0) {
-      setLoadingDetails(false);
-      return;
-    }
-
-    let cancelled = false;
-    let remaining = basicBlogs.length;
-    setLoadingDetails(true);
-
-    basicBlogs.forEach((b) => {
-      fetch(`${API_BASE}/Blog/GetById/${b.id}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => {
-          if (j && j.status && !cancelled) {
-            setBlogDetails((prev) => ({ ...prev, [b.id]: j.data }));
-          }
-        })
-        .catch(() => null)
-        .finally(() => {
-          remaining -= 1;
-          if (!cancelled && remaining <= 0) {
-            setLoadingDetails(false);
-          }
-        });
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [basicBlogs]);
-
-  const allBlogs = basicBlogs.map((b) => blogDetails[b.id] || b);
-
   const filteredBlogs =
     activeCategory === "All"
-      ? allBlogs
-      : allBlogs.filter(
+      ? blogs
+      : blogs.filter(
           (b) =>
             (b.blogCategory || b.categoryName || b.category || "")
               .replace(/\s/g, "")
               .toLowerCase() === activeCategory.replace(/\s/g, "").toLowerCase()
         );
 
-  const recentBlogs = [...allBlogs]
+  const recentBlogs = [...blogs]
     .sort((a, b) => new Date(b.publishedAt || b.createdAt || 0) - new Date(a.publishedAt || a.createdAt || 0))
     .slice(0, 4);
 
@@ -119,21 +81,20 @@ export default function Blog() {
                 <p className="text-gray-500 text-center py-16 text-lg">No blogs found in this category.</p>
               ) : (
                 filteredBlogs.map((blog) => {
-                  const isPlaceholder = !blog.slug || !blog.mainImage || !blog.blogTitle;
-                  const title = blog.blogTitle || blog.title || "Loading blog...";
+                  const title = blog.blogTitle || blog.title || "";
                   const category = blog.blogCategory || blog.categoryName || blog.category || "MARKET TRENDS";
                   const dateText = formatDate(blog.publishedAt || blog.createdAt);
 
                   return (
                     <div
                       key={blog.id || blog.slug}
-                      className={`bg-[#f5f5f5] rounded-[2rem] overflow-hidden transition duration-300 ${isPlaceholder ? "animate-pulse" : ""}`}
+                      className="bg-[#f5f5f5] rounded-[2rem] overflow-hidden transition duration-300"
                     >
                       <div className="relative w-full">
                         <img
                           src={blog.mainImage ? `${IMG_BASE}${blog.mainImage}` : "/images/gallery/services-banner.jpg"}
                           alt={blog.imageAlt || title}
-                          className={`w-full h-auto object-cover object-top aspect-[16/9] sm:aspect-[21/9] ${isPlaceholder ? "opacity-60" : ""}`}
+                          className="w-full h-auto object-cover object-top aspect-[16/9] sm:aspect-[21/9]"
                         />
                         <div className="absolute bottom-5 left-6 bg-white px-4 py-1.5 rounded text-sm font-semibold text-[#E32128]">
                           {dateText || "Loading date..."}

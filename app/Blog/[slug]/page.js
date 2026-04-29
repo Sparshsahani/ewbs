@@ -3,8 +3,8 @@ import Footer from '@/components/Footer'
 import React from 'react'
 import BlogDetail from './BlogDetail'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://newcrm.ewbsbusiness.ae/api/v1";
-const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE || "https://newcrm.ewbsbusiness.ae";
+const API_BASE = "https://api.ewbsbusiness.ae/api/v1";
+const IMG_BASE = "https://api.ewbsbusiness.ae";
 
 async function getBlogBySlug(slug) {
   try {
