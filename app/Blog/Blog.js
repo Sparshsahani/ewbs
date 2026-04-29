@@ -101,7 +101,7 @@ export default function Blog() {
       <ServiceBanner
         imageSrc="/images/gallery/services-banner.jpg"
         title="Explore Our"
-        title2="News"
+        title2="Blogs"
         subtitle="Meet our experts, guiding you through financial intricacies with precision"
       />
 

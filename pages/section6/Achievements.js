@@ -2,45 +2,38 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
-export default function Achievements() {
-  const stories = [
-    {
-      id: 1,
-      title: "EWBS Group teams up with Deccan Gladiators",
-      images: "/images/media/news1.jpeg",
-      link: "https://www.khaleejtimes.com/kt-network/ewbs-group-teams-up-with-deccan-gladiators",
-    },
-    {
-      id: 2,
-      title: "EWBS leadership recognised at Golden Excellence Awards",
-      images: "/images/media/news2.jpeg",
-      link: "https://www.khaleejtimes.com/kt-network/ewbs-leadership-recognised-at-golden-excellence-awards",
-    },
-    {
-      id: 3,
-      title: "EWBS Announces Launch Of Pioneering Service To Assist ...",
-      images: "/images/media/news3.jpeg",
-      link: "https://markets.businessinsider.com/news/stocks/ewbs-announces-launch-of-pioneering-service-to-assist-emerging-business-owners-with-business-setup-in-dubai-1033584871",
-    },
-    {
-      id: 4,
-      title: "EWBS: Pioneering business expansion in the Emirates",
-      images: "/images/media/news4.jpeg",
-      link: "https://www.khaleejtimes.com/kt-network/ewbs-pioneering-business-expansion-in-the-emirates",
-    },
-  ];
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://newcrm.ewbsbusiness.ae/api/v1";
+const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE || "https://newcrm.ewbsbusiness.ae";
 
+export default function Achievements() {
+  const [stories, setStories] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    async function fetchNews() {
+      try {
+        const res = await fetch(`${API_BASE}/News/GetLatest`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.status || !Array.isArray(json.data)) return;
+        setStories(json.data);
+      } catch (err) {
+        console.error("Failed to fetch latest news:", err);
+      }
+    }
+    fetchNews();
+  }, []);
+
+  useEffect(() => {
+    if (stories.length === 0) return;
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % stories.length);
-    }, 3000); // Change image every 3 seconds
-
+    }, 3000);
     return () => clearInterval(interval);
   }, [stories.length]);
 
-  const activeStory = stories[activeIndex];
+  if (stories.length === 0) return null;
+  const activeStory = stories[activeIndex] ?? stories[0];
 
   const ArrowIcon = () => (
     <svg
@@ -68,10 +61,10 @@ export default function Achievements() {
             Our New achievements.
           </h2>
           <a
-            href="/AboutUs"
+            href="/News"
             className="flex items-center text-[var(--bg-red)] font-medium text-lg hover:underline underline-offset-4"
           >
-            See all stories
+            See News
             <span className="ml-2 bg-[var(--bg-red)] text-white rounded-full w-6 h-6 flex items-center justify-center">
               <ArrowIcon />
             </span>
@@ -84,8 +77,8 @@ export default function Achievements() {
           <div className="w-full lg:w-2/3 relative rounded-xl overflow-hidden bg-gray-300 h-[300px] md:h-[400px]">
             <div  className="absolute inset-0 flex items-center justify-center text-gray-500">
               <Image
-                key={activeStory.id} // Forces re-render for smooth image swap if needed, or just let src change
-                src={activeStory.images}
+                key={activeStory.id}
+                src={`${IMG_BASE}${activeStory.image}`}
                 alt={activeStory.title}
                 width={2000}
                 height={2000}
@@ -95,7 +88,7 @@ export default function Achievements() {
 
             {/* Overlay */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex justify-between items-end">
-              <h3 className="text-white text-xl md:text-2xl xl:text-xl 2xl:text-2xl font-bold w-2/3 leading-tight">
+              <h3 className="text-white text-xl md:text-2xl xl:text-xl 2xl:text-2xl font-bold w-2/3 leading-tight line-clamp-2">
                 {activeStory.title}
               </h3>
               <a href={activeStory.link} target="_blank" rel="noopener noreferrer" className="bg-white text-black px-3 py-1.5 rounded-full flex items-center text-sm font-bold">
@@ -124,7 +117,7 @@ export default function Achievements() {
                         : "text-gray-400 group-hover:text-gray-600"
                     }`}
                   >
-                    {story.id}
+                    {index + 1}
                   </span>
                   <p
                     className={`text-sm md:text-xl xl:text-md 2xl:text-2xl pt-2 transition-colors duration-300 ${
@@ -133,7 +126,7 @@ export default function Achievements() {
                         : "text-gray-500 font-medium group-hover:text-gray-800"
                     }`}
                   >
-                    {story.title}
+                    <span className="line-clamp-2">{story.title}</span>
                   </p>
                 </div>
               );
@@ -149,7 +142,7 @@ export default function Achievements() {
               <div
                 key={story.id}
                 onClick={() => setActiveIndex(index)}
-                className={`rounded-xl p-4 flex flex-col justify-between h-[280px] cursor-pointer transition-all duration-300 ${
+                className={`rounded-xl p-4 flex flex-col justify-between h-[360px] cursor-pointer transition-all duration-300 ${
                   isActive
                     ? "bg-[var(--bg-red)] text-white scale-[1.02] shadow-lg"
                     : "bg-white text-gray-600 shadow-sm hover:shadow-md"
@@ -159,18 +152,25 @@ export default function Achievements() {
                   {/* Card Image */}
                   <div className="w-full h-32 rounded-lg mb-4 overflow-hidden relative">
                     <Image
-                      src={story.images}
+                      src={`${IMG_BASE}${story.image}`}
                       alt={story.title}
                       fill
                       className="object-cover"
                     />
                   </div>
                   <p
-                    className={`text-lg md:text-xl xl:text-[16px] 2xl:text-xl ${
+                    className={`text-lg md:text-xl xl:text-[16px] 2xl:text-xl line-clamp-2 ${
                       isActive ? "font-bold" : "font-medium"
                     }`}
                   >
                     {story.title}
+                  </p>
+                  <p
+                    className={`text-sm mt-2 line-clamp-2 ${
+                      isActive ? "text-white/80" : "text-gray-400"
+                    }`}
+                  >
+                    {story.description}
                   </p>
                 </div>
 
