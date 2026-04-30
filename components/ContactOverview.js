@@ -31,7 +31,7 @@ export default function ContactOverview({
                         <iframe
                             id="xxgjl9cdy3MIg0ldO6XF"
                             src="https://msgsndr.com/widget/form/xxgjl9cdy3MIg0ldO6XF"
-                            style={{ border: "none", width: "100%", minHeight: "400px", padding: 0 }}
+                            style={{ borderWidth: 0, borderStyle: "none", width: "100%", minHeight: "400px", padding: 0 }}
                             scrolling="no"
                         />
                         <script src="https://msgsndr.com/js/form_embed.js" />

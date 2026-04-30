@@ -29,12 +29,24 @@ export default function Navbar({
       ]
     },
     { label: "Services", href: "/business-setup-services-in-dubai", },
-    { label: "News", href: "/News" },
-    { label: "Gallery", href: "/Gallery" },
-    { label: "Blog", href: "/Blog" },
-    { label: "About Us", href: "/AboutUs" },
+    {
+      label: "Media",
+      href: "#media",
+      links: [
+        { label: "News", href: "/News" },
+        { label: "Gallery", href: "/Gallery" },
+        { label: "Blog", href: "/Blog" },
+      ],
+    },
     { label: "Careers", href: "/Career" },
-    { label: "Contact", href: "/ContactUs" },
+    {
+      label: "Contact",
+      href: "#contact",
+      links: [
+        { label: "About Us", href: "/AboutUs" },
+        { label: "Contact", href: "/ContactUs" },
+      ],
+    },
   ],
 }) {
   const [open, setOpen] = useState(false);
